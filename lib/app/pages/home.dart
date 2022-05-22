@@ -16,6 +16,12 @@ class HomePage extends StatelessWidget {
     final page = 1.obs;
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 48,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(24),
+          ),
+        ),
         title: const Text('Home'),
         actions: [const ActionAddToFavorite(), ActionToggleDarkMode()],
       ),
@@ -29,8 +35,8 @@ class HomePage extends StatelessWidget {
               return GridView.builder(
                 itemCount: snapshot.data!.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1,
+                  crossAxisCount: 3,
+                  childAspectRatio: 0.6,
                 ),
                 itemBuilder: (context, index) {
                   final data = snapshot.data![index];

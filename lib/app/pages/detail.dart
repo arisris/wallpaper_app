@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import '../apis/phoneky.dart';
 import '../services/settings.dart';
+import '../widgets/set_wallpaper_bottom_sheet.dart';
 
 class DetailPage extends StatelessWidget {
   DetailPage({Key? key}) : super(key: key);
@@ -14,34 +15,17 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = Get.arguments as WallpaperItemModel?;
     final isFavorite = false.obs;
+
     return Scaffold(
       body: args == null
           ? const Center(child: Text('No Data Result'))
           : Stack(
               children: [
                 InkWell(
-                  onLongPress: () => {
-                    Get.defaultDialog(
-                      title: 'Favorite',
-                      content: Text(
-                        isFavorite.value
-                            ? 'Remove from favorite'
-                            : 'Add to favorite',
-                      ),
-                      actions: [
-                        ElevatedButton(
-                          child: const Text('Cancel'),
-                          onPressed: () => Get.back(),
-                        ),
-                        ElevatedButton(
-                          child: const Text('OK'),
-                          onPressed: () {
-                            isFavorite.value = !isFavorite.value;
-                            Get.back();
-                          },
-                        ),
-                      ],
-                    )
+                  onTap: () => {
+                    Get.bottomSheet(
+                      SetWallPaperBottomSheet(item: args),
+                    ),
                   },
                   child: Container(
                     color: Colors.black,
